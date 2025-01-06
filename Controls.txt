@@ -1,0 +1,29 @@
+FARM GAME ALPHA 2.1
+
+Upper Area - Shop Ver2
+Bottom Area - Field Ver2
+Left Area - House (WIP)
+Right Area - Barn (WIP)
+
+W - Up
+S - Down
+A - Left
+D - Right
+
+Z - Equip Plow
+X - Equip Watering Pot
+C - Equip Fertilizer
+V - Equip Pickaxe
+B - Equip Shovel
+
+1 - Equip Turnip (Veg)
+2 - Equip Carrot
+3 - Equip Potato
+4 - Equip Rose
+5 - Equip Turnip (Flower)
+6 - Equip Sunflower
+7 - Equip Mango
+8 - Equip Apple
+
+E - Plant/Usetool
+Q - Harvest
