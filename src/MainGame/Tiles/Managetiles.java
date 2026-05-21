@@ -27,7 +27,7 @@ public class Managetiles {
     private int count = 0;
     private int toolbar[];
     private int toolbarequipped[];
-    private int equipped;
+    //private int equipped;
     
     public Managetiles(gamePanel gamepanel, Player player, Stats stats){
         this.gamepanel = gamepanel;
@@ -38,7 +38,7 @@ public class Managetiles {
         this.cropmap = new int[stats.getCropwidth()][stats.getCropheight()];
         this.toolbar = new int[16];
         this.toolbarequipped = new int[5];
-        this.equipped = player.getToolequipped();
+        //	this.equipped = player.getToolequipped();
 
         tileimage();
         loadmap("/maps/house.txt", 1);

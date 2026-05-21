@@ -14,7 +14,11 @@ import java.text.DecimalFormat;
 
 public class gamePanel extends JPanel implements Runnable{
 
-    // SCREEN RESOLUTION
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	// SCREEN RESOLUTION
     private final int ogtilesize = 16; //16x16 - 16-bit
     private final int scale = 3;
     private final int tilesize = ogtilesize * scale; //48x48 - scaled 16-bit
@@ -260,7 +264,7 @@ public class gamePanel extends JPanel implements Runnable{
         double drawinterval = 1000000000/FPS;
         double lasttime = System.nanoTime();
         double delta = 0;
-        long currenttime, timer = 0, drawcount = 0;
+        long currenttime, timer = 0; // drawcount = 0;
         while (gameThread != null){
             currenttime = System.nanoTime();
             delta += (currenttime - lasttime)/drawinterval;
@@ -279,13 +283,13 @@ public class gamePanel extends JPanel implements Runnable{
                 update();
                 repaint();
                 delta--;
-                drawcount++;
+                //drawcount++;
             }
             //System.out.println(df.format((int)(days)) + ":" + df.format((int)(minutes)) + ":" +df.format((int)(seconds/10000)));
             if (timer >= 1000000000){
                 
                 //System.out.println("FPS: " + drawcount);
-                drawcount = 0;
+                //drawcount = 0;
                 timer = 0;
             }
         }
