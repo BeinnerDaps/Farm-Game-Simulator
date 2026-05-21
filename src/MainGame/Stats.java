@@ -11,7 +11,7 @@ interface interfacestats
     void coindeduct6();
     void coindeduct7();
     void coindeduct8();
-    void coindeductrocks(); 
+    void coindeductrocks();
     void harvest1();
     void harvest2();
     void harvest3();
@@ -23,7 +23,7 @@ interface interfacestats
     void watercost();
     void fertilizercost();
     void explevel();
-    void plowcostexp();    
+    void plowcostexp();
     void useshovel();
     void expincreaserocks();
 }
@@ -42,7 +42,7 @@ public class Stats {
 
     private int cropheight;
     private int cropwidth;
-   
+
     //Landmarks
     private String landmark1;
     private String landmark2;
@@ -59,7 +59,7 @@ public class Stats {
     private int levelreq2;
     private int levelreq3;
     private int levelreq4;
-    
+
     private int bonusearning;
     private int bonusearning2;
     private int bonusearning3;
@@ -91,17 +91,17 @@ public class Stats {
 
     private String notify;
     private boolean notifycheck;
-    
 
-    public Stats (Seedcrops seedcrops, Equipment tools, String playername, int cropwidth, int cropheight, int objectcoins, 
+
+    public Stats (Seedcrops seedcrops, Equipment tools, String playername, int cropwidth, int cropheight, int objectcoins,
                         int farmerlevel, String landmark1, String landmark2, String landmark3, String landmark4, double timeskip,
-                        String farmertype1, String farmertype2, String farmertype3, String farmertype4, 
+                        String farmertype1, String farmertype2, String farmertype3, String farmertype4,
                         int levelreq1, int levelreq2, int levelreq3, int levelreq4,
-                        int bonusearning, int bonusearning2, int bonusearning3, int bonusearning4, 
+                        int bonusearning, int bonusearning2, int bonusearning3, int bonusearning4,
                         int seedcostreduct, int seedcostreduct2, int seedcostreduct3, int seedcostreduct4,
-                        int waterbonuslim, int waterbonuslim2, int waterbonuslim3, int waterbonuslim4, 
+                        int waterbonuslim, int waterbonuslim2, int waterbonuslim3, int waterbonuslim4,
                         int fertbonuslim, int fertbonuslim2, int fertbonuslim3, int fertbonuslim4,
-                        int registrationfee1, int registrationfee2, int registrationfee3, int registrationfee4) 
+                        int registrationfee1, int registrationfee2, int registrationfee3, int registrationfee4)
     {
         this.seedcrops = seedcrops;
         this.tools = tools;
@@ -201,7 +201,7 @@ public class Stats {
     //          notifycheck = true; notify = ("Sorry, not enough coins to unlock " + getFarmertype4());
     //     } else if (yesorno == 'n') {
     //         System.out.print("\n");
-    //     } 
+    //     }
     // }
 
     public void explevel()
@@ -303,7 +303,7 @@ public class Stats {
     }
 
     public void expincreaserocks()
-    {   
+    {
         if (objectcoins >= tools.getTool4Cost()){
             exp += tools.getTool4XP();
         }
@@ -773,5 +773,5 @@ public class Stats {
         this.notifycheck = notifycheck;
     }
 
-    
+
 }

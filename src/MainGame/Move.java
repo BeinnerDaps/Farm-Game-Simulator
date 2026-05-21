@@ -12,11 +12,11 @@ public class Move implements KeyListener {
     @Override
     public void keyTyped(KeyEvent e) {
 
-       
+
     }
     @Override
     public void keyPressed(KeyEvent e) {
-        
+
         int code = e.getKeyCode();
 
         if (code == KeyEvent.VK_W) {
@@ -27,12 +27,12 @@ public class Move implements KeyListener {
             left = true;
         } if (code == KeyEvent.VK_D) {
             right = true;
-        } 
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        
+
         int code = e.getKeyCode();
 
         if (code == KeyEvent.VK_W) {
@@ -63,6 +63,6 @@ public class Move implements KeyListener {
             case KeyEvent.VK_6: seed1 = false; seed2 = false; seed3 = false; seed4 = false; seed5 = false; seed6 = true; seed7 = false; seed8 = false; tool1 = false; tool2 = false; tool3 = false; tool4 = false; tool5 = false; break;
             case KeyEvent.VK_7: seed1 = false; seed2 = false; seed3 = false; seed4 = false; seed5 = false; seed6 = false; seed7 = true; seed8 = false; tool1 = false; tool2 = false; tool3 = false; tool4 = false; tool5 = false; break;
             case KeyEvent.VK_8: seed1 = false; seed2 = false; seed3 = false; seed4 = false; seed5 = false; seed6 = false; seed7 = false; seed8 = true; tool1 = false; tool2 = false; tool3 = false; tool4 = false; tool5 = false; break;
-        }   
+        }
     }
 }

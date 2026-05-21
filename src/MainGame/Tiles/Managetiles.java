@@ -1,17 +1,17 @@
 package MainGame.Tiles;
 
+import java.awt.Graphics2D;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import javax.imageio.ImageIO;
-import java.awt.Graphics2D;
+import java.text.DecimalFormat;
 
+import javax.imageio.ImageIO;
+
+import MainGame.Player;
 import MainGame.Stats;
 import MainGame.gamePanel;
-import MainGame.Player;
-
-import java.text.DecimalFormat;
 
 
 
@@ -28,7 +28,7 @@ public class Managetiles {
     private int toolbar[];
     private int toolbarequipped[];
     //private int equipped;
-    
+
     public Managetiles(gamePanel gamepanel, Player player, Stats stats){
         this.gamepanel = gamepanel;
         this.player = player;
@@ -55,7 +55,7 @@ public class Managetiles {
         try {
             for (i = 0; i < totaltiles; i++) {
                 tile[i] = new Tiles();
-            } 
+            }
             tile[0].image = ImageIO.read(getClass().getResourceAsStream("/Tiles/dirt.png"));
             tile[1].image = ImageIO.read(getClass().getResourceAsStream("/Tiles/stone.png"));
             tile[2].image = ImageIO.read(getClass().getResourceAsStream("/Tiles/grass.png"));
@@ -96,7 +96,7 @@ public class Managetiles {
             tile[30].image = ImageIO.read(getClass().getResourceAsStream("/Tiles/icons/Sunflowericon.png"));
             tile[31].image = ImageIO.read(getClass().getResourceAsStream("/Tiles/icons/Mangoicon.png"));
             tile[32].image = ImageIO.read(getClass().getResourceAsStream("/Tiles/icons/Appleicon.png"));
-            
+
 
             for (i = 0; i < 36; i++) { //last number 68
                 tile[i+33].image = ImageIO.read(getClass().getResourceAsStream("/Tiles/House/image_part_" + df.format(i+1) + ".png"));
@@ -113,13 +113,13 @@ public class Managetiles {
             tile[137].image = ImageIO.read(getClass().getResourceAsStream("/tools/Fertilizer.png"));
             tile[138].image = ImageIO.read(getClass().getResourceAsStream("/tools/Pickaxe.png"));
             tile[139].image = ImageIO.read(getClass().getResourceAsStream("/tools/Shovel.png"));
-            
+
             tile[140].image = ImageIO.read(getClass().getResourceAsStream("/tools/Plowequip.png"));
             tile[141].image = ImageIO.read(getClass().getResourceAsStream("/tools/Waterpotequip.png"));
             tile[142].image = ImageIO.read(getClass().getResourceAsStream("/tools/Fertilizerequip.png"));
             tile[143].image = ImageIO.read(getClass().getResourceAsStream("/tools/Pickaxeequip.png"));
             tile[144].image = ImageIO.read(getClass().getResourceAsStream("/tools/shovelequip.png"));
-            
+
             for (i = 0; i < 4; i++) { //last number 148
                 tile[i+145].image = ImageIO.read(getClass().getResourceAsStream("/Tiles/Well/image_part_" + df.format(i+1) + ".png"));
             }
@@ -190,7 +190,7 @@ public class Managetiles {
             }
             br.close();
         } catch (Exception e) {
-            
+
         }
     }
 
@@ -205,7 +205,7 @@ public class Managetiles {
                 graphics2d.drawImage(tile[tilechosen].image, x, y, gamepanel.getTilesize(), gamepanel.getTilesize(), null);
                 x += gamepanel.getTilesize();
             }
-            y += gamepanel.getTilesize();            
+            y += gamepanel.getTilesize();
         }
     }
 
@@ -220,12 +220,12 @@ public class Managetiles {
                 graphics2d.drawImage(tile[cropper].image, x, y, gamepanel.getTilesize(), gamepanel.getTilesize(), null);
                 x += gamepanel.getTilesize();
             }
-            y += gamepanel.getTilesize();            
+            y += gamepanel.getTilesize();
         }
     }
 
     public void cropoverlay()
-    {   
+    {
 
         gamepanel.croppers.rocks();
         count = 1;
@@ -270,7 +270,7 @@ public class Managetiles {
         this.count = count;
     }
 
-    
 
-    
+
+
 }

@@ -1,6 +1,6 @@
 package MainGame;
 
-interface interfaceshop 
+interface interfaceshop
 {
     void buyseed1();
     void buyseed2();
@@ -13,9 +13,9 @@ interface interfaceshop
     void seedsdeduct1();
     void seedsdeduct2();
     void seedsdeduct3();
-    void seedsdeduct4(); 
+    void seedsdeduct4();
     void seedsdeduct5();
-    void seedsdeduct6();    
+    void seedsdeduct6();
     void seedsdeduct7();
     void seedsdeduct8();
 }
@@ -32,7 +32,7 @@ public class Shop {
     private int seedamount7;
     private int seedamount8;
 
-    public Shop(Stats stats, int seedamount1, int seedamount2, int seedamount3, int seedamount4, 
+    public Shop(Stats stats, int seedamount1, int seedamount2, int seedamount3, int seedamount4,
                 int seedamount5, int seedamount6, int seedamount7, int seedamount8) {
         this.stats = stats;
         this.seedamount1 = seedamount1;
@@ -65,7 +65,7 @@ public class Shop {
 
     public void buyseed4()
     {
-        seedamount4 += 1;  
+        seedamount4 += 1;
         stats.coindeduct4();
     }
 
@@ -102,7 +102,7 @@ public class Shop {
     {
         seedamount2 -= 1;
     }
-    
+
     public void seedsdeduct3()
     {
         seedamount3 -= 1;
@@ -122,7 +122,7 @@ public class Shop {
     {
         seedamount6 -= 1;
     }
-    
+
     public void seedsdeduct7()
     {
         seedamount7 -= 1;

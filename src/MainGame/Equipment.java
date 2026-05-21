@@ -17,7 +17,7 @@ public class Equipment {
     private int Tool5Cost;
     private int Tool5XP;
 
-    public Equipment(String tool1, int tool1Cost, double tool1XP, String tool2, int tool2Cost, double tool2XP, String tool3, int tool3Cost, int tool3XP, 
+    public Equipment(String tool1, int tool1Cost, double tool1XP, String tool2, int tool2Cost, double tool2XP, String tool3, int tool3Cost, int tool3XP,
                  String tool4, int tool4Cost, int tool4XP, String tool5, int tool5Cost, int tool5XP) {
         this.Tool1 = tool1;
         this.Tool1Cost = tool1Cost;

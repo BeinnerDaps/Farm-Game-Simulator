@@ -3,6 +3,7 @@ package MainGame;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
 
 interface interfaceplayer
@@ -10,7 +11,7 @@ interface interfaceplayer
     void Playersprite();
     void interact();
     void update();
-    void drawplayer();    
+    void drawplayer();
 }
 
 public class Player {
@@ -42,7 +43,7 @@ public class Player {
         this.direction = "down";
         this.spritecount = 0;
         this.spritenum = 1;
-        this.i = true; 
+        this.i = true;
         this.currentmap = 0;
         Playersprite();
     }
@@ -72,15 +73,15 @@ public class Player {
             wright5 = ImageIO.read(getClass().getResourceAsStream("/playersprite/walk_right_5.png"));
             wright6 = ImageIO.read(getClass().getResourceAsStream("/playersprite/walk_right_6.png"));
             wright7 = ImageIO.read(getClass().getResourceAsStream("/playersprite/walk_right_7.png"));
-            wright8 = ImageIO.read(getClass().getResourceAsStream("/playersprite/walk_right_8.png")); 
-        
+            wright8 = ImageIO.read(getClass().getResourceAsStream("/playersprite/walk_right_8.png"));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void interact() { 
-    
+    public void interact() {
+
         if (keymove.tool1) {
             toolequipped = 1; //Plow
         } else if (keymove.tool2) {
@@ -109,7 +110,7 @@ public class Player {
         }
         if (currentmap == 4) {
             if (getY() <= gamepanel.getScreenheight() + gamepanel.getTilesize()*9 && getY() >= gamepanel.getScreenheight() + gamepanel.getTilesize()*4 &&
-                getX() >= (gamepanel.getTilesize()*3) && getX() <= gamepanel.getScreenwidth() - gamepanel.getTilesize()*3) { 
+                getX() >= (gamepanel.getTilesize()*3) && getX() <= gamepanel.getScreenwidth() - gamepanel.getTilesize()*3) {
                 if (keymove.harvest) {
                     gamepanel.croppers.harvesting();
                 }
@@ -131,9 +132,9 @@ public class Player {
                         default: System.out.println("emptyhand"); break;
                     }
                 }
-            } 
-        } 
-        
+            }
+        }
+
         if (currentmap == 3 && keymove.interact) {
                    if (getY() >= -(gamepanel.getScreenheight()) + gamepanel.getTilesize()*5 && getY() <= -(gamepanel.getTilesize()*6) && getX() <= (gamepanel.getTilesize()*3) && getX() >= gamepanel.getTilesize()*2){
                 gamepanel.shop.buyseed1();
@@ -159,102 +160,102 @@ public class Player {
 
     public void update()
     {
-        if (keymove.up == true) {
+        if (keymove.up) {
             direction = "up";
             // Shop
             if (currentmap == 3) {
                 if (y >= -(gamepanel.getScreenheight() - gamepanel.getTilesize() - gamepanel.getTilesize()/2)) {
-                    playerypos -= playerspeed; 
+                    playerypos -= playerspeed;
                     y -= playerspeed;
-                } 
+                }
             } else if (currentmap == 1 || currentmap == 2) {
                 if (y >= gamepanel.getTilesize()) {
-                    playerypos -= playerspeed; 
+                    playerypos -= playerspeed;
                     y -= playerspeed;
                 }
             } else {
-                playerypos -= playerspeed; 
+                playerypos -= playerspeed;
                 y -= playerspeed;
             }
-        } if (keymove.down == true) {
+        } if (keymove.down) {
             // Field
-            direction = "down"; 
+            direction = "down";
             if (currentmap == 4) {
                 if (y <= ((gamepanel.getScreenheight()*2) - (gamepanel.getTilesize()/2 + gamepanel.getTilesize()))) {
-                    playerypos += playerspeed; 
+                    playerypos += playerspeed;
                     y += playerspeed;
                 }
             } else if (currentmap == 1 || currentmap == 2) {
                 if (y <= (gamepanel.getScreenheight() - gamepanel.getTilesize()*3 + gamepanel.getTilesize()/2)) {
-                    playerypos += playerspeed; 
+                    playerypos += playerspeed;
                     y += playerspeed;
                 }
             } else {
-                playerypos += playerspeed; 
-                y += playerspeed; 
+                playerypos += playerspeed;
+                y += playerspeed;
             }
             //House
-        } if (keymove.left == true) {
+        } if (keymove.left) {
             direction = "left";
             i = true;
             if (currentmap == 1) { // House
                 if (x >= -(gamepanel.getScreenwidth())) {
-                    playerxpos -= playerspeed; 
+                    playerxpos -= playerspeed;
                     x -= playerspeed;
-                } 
+                }
             } else if (currentmap == 4) { // Field
                 if (x >= gamepanel.getTilesize()){
-                    playerxpos -= playerspeed; 
+                    playerxpos -= playerspeed;
                     x -= playerspeed;
                 }
             } else if (currentmap == 3) { //Shop
                 if (x >= gamepanel.getTilesize()*2 + gamepanel.getTilesize()/2){
-                    playerxpos -= playerspeed; 
+                    playerxpos -= playerspeed;
                     x -= playerspeed;
                 }
-            } else { 
-                playerxpos -= playerspeed; 
+            } else {
+                playerxpos -= playerspeed;
                 x -= playerspeed;
             }
             //Barn
-        } if (keymove.right == true) {
+        } if (keymove.right) {
             direction = "right";
             i = false;
             if (currentmap == 2) {//Barn
                 if (x <= (gamepanel.getScreenwidth()*2 - gamepanel.getTilesize() + gamepanel.getTilesize()/2)) {
-                    playerxpos += playerspeed; 
+                    playerxpos += playerspeed;
                     x += playerspeed;
                 }
             } else if (currentmap == 4) { //Field
                 if (x <= gamepanel.getScreenwidth()- gamepanel.getTilesize()*2 + gamepanel.getTilesize()){
-                    playerxpos += playerspeed; 
+                    playerxpos += playerspeed;
                     x += playerspeed;
                 }
             } else if (currentmap == 3) { //Shop
                 if (x <= gamepanel.getScreenwidth()- gamepanel.getTilesize()*3 + gamepanel.getTilesize()/2){
-                    playerxpos += playerspeed; 
+                    playerxpos += playerspeed;
                     x += playerspeed;
                 }
             } else {
-                playerxpos += playerspeed; 
+                playerxpos += playerspeed;
                 x += playerspeed;
             }
-        } if (keymove.left == false && keymove.right == false && keymove.up == false && keymove.down == false) {
-            direction = "stay";  
+        } if (!keymove.left && !keymove.right && !keymove.up && !keymove.down) {
+            direction = "stay";
         }
 
         if (x <= -(gamepanel.getTilesize())) {
-            currentmap = 1;; // House
+            currentmap = 1; // House
         } else if (x >= ((gamepanel.getScreenwidth()) - (gamepanel.getTilesize()/2)) + gamepanel.getTilesize()) {
-            currentmap = 2;; // Barn
+            currentmap = 2; // Barn
         } else if (y <= -(gamepanel.getTilesize())) {
-            currentmap = 3;; // Shop
+            currentmap = 3; // Shop
         } else if (y >= ((gamepanel.getScreenheight()) - (gamepanel.getTilesize()/2)) + gamepanel.getTilesize()) {
             currentmap = 4; // Field
         } else {
             currentmap = 0;
         }
- 
+
         spritecount++;
         if (spritecount > 8){
             if (spritenum == 1) {
@@ -285,7 +286,7 @@ public class Player {
             playerypos = gamepanel.getTilesize()*gamepanel.getMaxscreenrows();
         } else if (playerypos > gamepanel.getTilesize()*gamepanel.getMaxscreenrows()) {
             playerypos = -(gamepanel.getTilesize());
-        } 
+        }
     }
 
     public void drawplayer(Graphics2D graphics2d)
@@ -295,7 +296,7 @@ public class Player {
         // movement animation
         switch (direction) {
             case "up":
-                if (i == true) {
+                if (i) {
                     switch (spritenum) {
                         case 1: image = wleft1; break;
                         case 2: image = wleft2; break;
@@ -306,7 +307,7 @@ public class Player {
                         case 7: image = wleft7; break;
                         case 8: image = wleft8; break;
                     }
-                } else if (i == false) {
+                } else if (!i) {
                     switch (spritenum) {
                         case 1: image = wright1; break;
                         case 2: image = wright2; break;
@@ -320,7 +321,7 @@ public class Player {
                 }
                 break;
             case "down":
-                if (i == true) {
+                if (i) {
                     switch (spritenum) {
                         case 1: image = wleft1; break;
                         case 2: image = wleft2; break;
@@ -331,7 +332,7 @@ public class Player {
                         case 7: image = wleft7; break;
                         case 8: image = wleft8; break;
                     }
-                } else if (i == false) {
+                } else if (!i) {
                     switch (spritenum) {
                         case 1: image = wright1; break;
                         case 2: image = wright2; break;
@@ -354,7 +355,7 @@ public class Player {
                     case 6: image = wleft6; break;
                     case 7: image = wleft7; break;
                     case 8: image = wleft8; break;
-                } 
+                }
                 break;
             case "right":
                 switch (spritenum) {
@@ -366,10 +367,10 @@ public class Player {
                     case 6: image = wright6; break;
                     case 7: image = wright7; break;
                     case 8: image = wright8; break;
-                } 
+                }
                 break;
-            case "stay":   
-                if (i == true) {
+            case "stay":
+                if (i) {
                     switch (spritenum) {
                         case 1: image = idleleft1; break;
                         case 2: image = idleleft1; break;
@@ -380,7 +381,7 @@ public class Player {
                         case 7: image = idleleft2; break;
                         case 8: image = idleleft2; break;
                     }
-                } else if (i == false) {
+                } else if (!i) {
                     switch (spritenum) {
                         case 1: image = idleright1; break;
                         case 2: image = idleright1; break;

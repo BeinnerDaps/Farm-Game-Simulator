@@ -1,21 +1,21 @@
 package MainGame;
 
-import MainGame.Tiles.Crops;
-import MainGame.Tiles.Managetiles;
-
-import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
 import java.text.DecimalFormat;
+
+import javax.swing.JPanel;
+
+import MainGame.Tiles.Crops;
+import MainGame.Tiles.Managetiles;
 
 public class gamePanel extends JPanel implements Runnable{
 
     /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	// SCREEN RESOLUTION
@@ -33,10 +33,10 @@ public class gamePanel extends JPanel implements Runnable{
 
     // NUMBER OF MAPS
     private int maxmaps = 5;
-    private double seconds = 0; 
+    private double seconds = 0;
     private int minutes = 0, now = 0;
     private boolean timecheck = false;
-    
+
     // What runs the code
     Thread gameThread;
 
@@ -46,9 +46,9 @@ public class gamePanel extends JPanel implements Runnable{
     // PLAYER class - player position, action, etc.
     Player player = new Player(
         this,
-        keymove, 
-        ((screenwidth/2) - (tilesize/2)), 
-        ((screenheight/2) - (tilesize/2)), 
+        keymove,
+        ((screenwidth/2) - (tilesize/2)),
+        ((screenheight/2) - (tilesize/2)),
         4
     );
 
@@ -59,7 +59,7 @@ public class gamePanel extends JPanel implements Runnable{
         "Fruit Tree",
 
         //seed1
-        "Turnip", 
+        "Turnip",
         2,
         1,
         0,
@@ -82,7 +82,7 @@ public class gamePanel extends JPanel implements Runnable{
 
         //seed3
         "Potato",
-        5, 
+        5,
         3,
         1,
         20,
@@ -146,19 +146,19 @@ public class gamePanel extends JPanel implements Runnable{
 
     // TOOL class - holds all information about tools used
     Equipment tool = new Equipment(
-        "Plow", 
-        0, 
+        "Plow",
+        0,
         0.5,
-        "Watering Can", 
-        0, 
+        "Watering Can",
+        0,
         0.5,
-        "Fertilizer", 
-        10, 
+        "Fertilizer",
+        10,
         4,
-        "Pickaxe", 
-        50, 
+        "Pickaxe",
+        50,
         15,
-        "Shovel", 
+        "Shovel",
         7,
         2
         );
@@ -170,11 +170,11 @@ public class gamePanel extends JPanel implements Runnable{
         "player",
         10,
         5,
-        500, 
+        500,
         0,
         "Shop",
-        "House", 
-        "Field", 
+        "House",
+        "Field",
         "Storage",
         0,
         "Farmer",
@@ -209,7 +209,7 @@ public class gamePanel extends JPanel implements Runnable{
 
     //TILES class - contains the all sprites used to show graphics
     public Managetiles tilebg = new Managetiles(
-        this, 
+        this,
         player,
         stats
     );
@@ -226,8 +226,8 @@ public class gamePanel extends JPanel implements Runnable{
         10,
         10
     );
-    
-    //CROPS class - plows field, plants seeds, harvest crops, etc. The main attraction 
+
+    //CROPS class - plows field, plants seeds, harvest crops, etc. The main attraction
     public Crops croppers = new Crops(
         this,
         tilebg,
@@ -249,7 +249,7 @@ public class gamePanel extends JPanel implements Runnable{
         this.setFocusable(true);
         this.FPS = FPS;
     }
-    
+
     // startThread() - Starts Gameplay
     public void startThread()
     {
@@ -259,7 +259,7 @@ public class gamePanel extends JPanel implements Runnable{
 
     @Override
     // keeps track of Time loops
-    public void run() 
+    public void run()
     {
         double drawinterval = 1000000000/FPS;
         double lasttime = System.nanoTime();
@@ -277,7 +277,7 @@ public class gamePanel extends JPanel implements Runnable{
             } if (minutes >= 100) {
                 minutes = 0;
             }
-        
+
             if (delta >= 1){
                 action();
                 update();
@@ -287,7 +287,7 @@ public class gamePanel extends JPanel implements Runnable{
             }
             //System.out.println(df.format((int)(days)) + ":" + df.format((int)(minutes)) + ":" +df.format((int)(seconds/10000)));
             if (timer >= 1000000000){
-                
+
                 //System.out.println("FPS: " + drawcount);
                 //drawcount = 0;
                 timer = 0;
@@ -305,9 +305,10 @@ public class gamePanel extends JPanel implements Runnable{
     {
         player.interact();
     }
-    
+
     // paintComponent() - illustrates graphics and put it on the screen
-    public void paintComponent(Graphics graphics)
+    @Override
+	public void paintComponent(Graphics graphics)
     {
         super.paintComponent(graphics);
         Graphics2D graphics2d = (Graphics2D)graphics;
@@ -324,65 +325,65 @@ public class gamePanel extends JPanel implements Runnable{
         if (croppers.isErrorindicator()) {
             stats.notifyreset();
             printerror(graphics2d);
-            if (timecheck == false){
+            if (!timecheck){
                 now = (int)(seconds);
-                timecheck = true; 
+                timecheck = true;
                 //System.out.println(minutes);
-            } 
-        } 
+            }
+        }
         if (stats.isNotifycheck()) {
             croppers.errorreset();
             printnotify(graphics2d);
-            if (timecheck == false){
+            if (!timecheck){
                 now = (int)(seconds);
-                timecheck = true; 
-            } 
+                timecheck = true;
+            }
         }
         if (seconds > now+2) {
             croppers.errorreset();
             stats.notifyreset();
             timecheck = false;
-        }     
+        }
         player.interact();
         graphics2d.dispose();
     }
-    
+
     // paintLabel() - printsout text in GUI as indicators of amount/time/level/etc.
     public void paintLabel(Graphics toolbar){
         // LABEL
         toolbar.setFont(new Font("SansSerif", Font.BOLD, 15));
         toolbar.setColor(Color.white);
-        toolbar.drawString(stats.getObjectcoins()+"", tilesize*5 + tilesize/3 - 5, screenheight - (int)(tilesize) );
-        toolbar.drawString(stats.getExp()+"", tilesize*6 + tilesize/3 -3, screenheight - (int)(tilesize));
+        toolbar.drawString(stats.getObjectcoins()+"", tilesize*5 + tilesize/3 - 5, screenheight - (tilesize) );
+        toolbar.drawString(stats.getExp()+"", tilesize*6 + tilesize/3 -3, screenheight - (tilesize));
         toolbar.drawString("Lvl " + stats.getFarmerlevel(), tilesize*7 + tilesize/3 -8, screenheight - (int)(tilesize/2.5));
-        toolbar.drawString(""+shop.getSeedamount1(), tilesize*8 + tilesize/3 -8, screenheight - (int)(tilesize));
-        toolbar.drawString(""+shop.getSeedamount2(), tilesize*9 + tilesize/3 -8, screenheight - (int)(tilesize));
-        toolbar.drawString(""+shop.getSeedamount3(), tilesize*10 + tilesize/3 -8, screenheight - (int)(tilesize));
-        toolbar.drawString(""+shop.getSeedamount4(), tilesize*11 + tilesize/3 -8, screenheight - (int)(tilesize));
-        toolbar.drawString(""+shop.getSeedamount5(), tilesize*12 + tilesize/3 -8, screenheight - (int)(tilesize));
-        toolbar.drawString(""+shop.getSeedamount6(), tilesize*13 + tilesize/3 -8, screenheight - (int)(tilesize));
-        toolbar.drawString(""+shop.getSeedamount7(), tilesize*14 + tilesize/3 -8, screenheight - (int)(tilesize));
-        toolbar.drawString(""+shop.getSeedamount8(), tilesize*15 + tilesize/3 -8, screenheight - (int)(tilesize));
-        
+        toolbar.drawString(""+shop.getSeedamount1(), tilesize*8 + tilesize/3 -8, screenheight - (tilesize));
+        toolbar.drawString(""+shop.getSeedamount2(), tilesize*9 + tilesize/3 -8, screenheight - (tilesize));
+        toolbar.drawString(""+shop.getSeedamount3(), tilesize*10 + tilesize/3 -8, screenheight - (tilesize));
+        toolbar.drawString(""+shop.getSeedamount4(), tilesize*11 + tilesize/3 -8, screenheight - (tilesize));
+        toolbar.drawString(""+shop.getSeedamount5(), tilesize*12 + tilesize/3 -8, screenheight - (tilesize));
+        toolbar.drawString(""+shop.getSeedamount6(), tilesize*13 + tilesize/3 -8, screenheight - (tilesize));
+        toolbar.drawString(""+shop.getSeedamount7(), tilesize*14 + tilesize/3 -8, screenheight - (tilesize));
+        toolbar.drawString(""+shop.getSeedamount8(), tilesize*15 + tilesize/3 -8, screenheight - (tilesize));
+
     }
 
     // timeprint() - prints the time
     public void timeprint(Graphics timewatch) {
-        timewatch.setFont(new Font("SansSerif", Font.BOLD, 30));  
+        timewatch.setFont(new Font("SansSerif", Font.BOLD, 30));
         timewatch.setColor(Color.white);
-        timewatch.drawString("Day:" + df.format((int)(minutes)) + "." +df.format((int)(seconds)), 5, tilesize/2);
+        timewatch.drawString("Day:" + df.format((minutes)) + "." +df.format((int)(seconds)), 5, tilesize/2);
     }
     // printerror() - prints errors
     public void printerror(Graphics printerror) {
-        printerror.setFont(new Font("SansSerif", Font.BOLD, 20)); 
-        printerror.setColor(Color.white); 
+        printerror.setFont(new Font("SansSerif", Font.BOLD, 20));
+        printerror.setColor(Color.white);
         printerror.drawString(croppers.getError(), tilesize, screenheight - (tilesize*2 + tilesize/2));
     }
 
     //  printnotify() - prints messages
     public void printnotify(Graphics printerror) {
-        printerror.setFont(new Font("SansSerif", Font.BOLD, 20)); 
-        printerror.setColor(Color.white); 
+        printerror.setFont(new Font("SansSerif", Font.BOLD, 20));
+        printerror.setColor(Color.white);
         printerror.drawString(stats.getNotify(), tilesize, screenheight - (tilesize*2 + tilesize/2));
     }
 

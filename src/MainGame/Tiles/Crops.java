@@ -1,25 +1,26 @@
 package MainGame.Tiles;
 
+import java.util.Random;
+
+import MainGame.Equipment;
+import MainGame.Player;
 import MainGame.Seedcrops;
 import MainGame.Shop;
 import MainGame.Stats;
 import MainGame.gamePanel;
-import MainGame.Equipment;
-import MainGame.Player;
-import java.util.Random;
 
 interface interfacecrops
 {
     void errorreset(); // resets error messages
     void croplocation(); //shows where player is currently located in crop
-    void rocks(); //places rocks in 
+    void rocks(); //places rocks in
     void rocksremove(); // removes rocks
     void plowfield(); //plows fields
     void waterplants(); // waters plants
     void fertilizerplants(); // fertilizes plants
     void waterandfertstatus(); // tells if the plant is watered or fertilized
     void shovelling(); // uses shovel and removes crops
-    void harvesting(); // harvests the crop 
+    void harvesting(); // harvests the crop
     void fruittreecropremove(); // used for removing the bigger crops that need 3x3 spaces
     void seed1plant(); // plants seed1
     void seed2plant(); // plants seed2
@@ -34,7 +35,7 @@ interface interfacecrops
 }
 
 public class Crops extends Managetiles{
-    
+
     private gamePanel gamepanel;
     private Managetiles managetiles;
     private Player player;
@@ -59,7 +60,7 @@ public class Crops extends Managetiles{
 
     // plotstatus
     private int plotstatus[][];
-    
+
     // cropstatus
     private int cropstatus[][];
 
@@ -75,7 +76,7 @@ public class Crops extends Managetiles{
 
     //harvest yield
     private int harvest[];
-    
+
     public Crops(gamePanel gamepanel, Managetiles managetiles, Player player, Stats stats, Seedcrops seedcrops, Shop shop, Equipment equipment)
     {
         super(gamepanel, player, stats);
@@ -120,7 +121,7 @@ public class Crops extends Managetiles{
                     cropstatus[j][i] = 0;
             }
         }
-        
+
         for (i = 0; i < stats.getCropheight(); i++) {
             for (j = 0; j < stats.getCropwidth(); j++) {
                     dayplanted[j][i] = 0;
@@ -160,9 +161,9 @@ public class Crops extends Managetiles{
             player.getX() >= (gamepanel.getTilesize()*3) && player.getX() <= gamepanel.getScreenwidth() - gamepanel.getTilesize()*3) {
             for (j = 0; j < stats.getCropwidth(); j++) {
                 if (player.getX() >= (gamepanel.getTilesize()*3 + gamepanel.getTilesize()*j) && player.getX() <= (gamepanel.getTilesize()*3 + gamepanel.getTilesize()*(j+1))) {
-                    playertilex = j;       
+                    playertilex = j;
                 }
-            } 
+            }
             for (i = 0; i < stats.getCropheight(); i++){
                 if (player.getY() >= (gamepanel.getScreenheight() + gamepanel.getTilesize()*4 + gamepanel.getTilesize()*i) && player.getY() <= (gamepanel.getScreenheight() + gamepanel.getTilesize()*4 + gamepanel.getTilesize()*(i+1))) {
                     playertiley = i;
@@ -435,7 +436,7 @@ public class Crops extends Managetiles{
                 errorindicator = true; error = ("Fertilizer requirement met");
             } } else if (fertilizer[playertilex][playertiley] >= seedcrops.getFertilizerneeds8() && water[playertilex][playertiley] >= seedcrops.getWaterneed8()) {
                 errorindicator = true; error = ("Fertilizer requirement met");
-        } 
+        }
     }
 
     public void harvesting()
@@ -448,7 +449,7 @@ public class Crops extends Managetiles{
             errorindicator = true; error = ("ERROR: Plot unoccupied");
 
         } else if (rockstatus[playertilex][playertiley] == 0 && plotstatus[playertilex][playertiley] == 1 && cropstatus[playertilex][playertiley] == 1 && gamepanel.getMinutes() < dayplanted[playertilex][playertiley]+seedcrops.getHarvesttime1()) {
-            errorindicator = true; error = ("ERROR: " + seedcrops.getSeedname1() + " not yet ready to harvest");     
+            errorindicator = true; error = ("ERROR: " + seedcrops.getSeedname1() + " not yet ready to harvest");
         } else if (rockstatus[playertilex][playertiley] == 0 && plotstatus[playertilex][playertiley] == 1 && cropstatus[playertilex][playertiley] == 2 && gamepanel.getMinutes() < dayplanted[playertilex][playertiley]+seedcrops.getHarvesttime2()) {
             errorindicator = true; error = ("ERROR: " + seedcrops.getSeedname2() + " not yet ready to harvest");
         } else if (rockstatus[playertilex][playertiley] == 0 && plotstatus[playertilex][playertiley] == 1 && cropstatus[playertilex][playertiley] == 3 && gamepanel.getMinutes() < dayplanted[playertilex][playertiley]+seedcrops.getHarvesttime3()) {
@@ -480,7 +481,7 @@ public class Crops extends Managetiles{
             errorindicator = true; error = ("ERROR: " + seedcrops.getSeedname7() + " has withered");
         } else if (rockstatus[playertilex][playertiley] == 0 && plotstatus[playertilex][playertiley] == 1 && cropstatus[playertilex][playertiley] == 8 && gamepanel.getMinutes() > dayplanted[playertilex][playertiley]+seedcrops.getHarvesttime8()) {
             errorindicator = true; error = ("ERROR: " + seedcrops.getSeedname8() + " has withered");
-        
+
         } else if (rockstatus[playertilex][playertiley] == 0 && plotstatus[playertilex][playertiley] == 1 && cropstatus[playertilex][playertiley] == 1 && gamepanel.getMinutes() == dayplanted[playertilex][playertiley]+seedcrops.getHarvesttime1() && fertilizer[playertilex][playertiley] >= (seedcrops.getFertilizerneeds1() + stats.getFertbonuslim()) && water[playertilex][playertiley] >= (seedcrops.getWaterneed1() + stats.getWaterbonuslim())) {
             stats.harvest1();
             harvest[0] += seedcrops.getProductyield1();
@@ -490,7 +491,7 @@ public class Crops extends Managetiles{
             daycheck[playertilex][playertiley] = false;
             fertilizer[playertilex][playertiley] = 0;
             water[playertilex][playertiley] = 0;
-            errorindicator = true; error = (seedcrops.getProductyield1() + " " + seedcrops.getSeedname1() + " Harvested. " + harvest[0] + " total harvests.");     
+            errorindicator = true; error = (seedcrops.getProductyield1() + " " + seedcrops.getSeedname1() + " Harvested. " + harvest[0] + " total harvests.");
         } else if (rockstatus[playertilex][playertiley] == 0 && plotstatus[playertilex][playertiley] == 1 && cropstatus[playertilex][playertiley] == 2 && gamepanel.getMinutes() == dayplanted[playertilex][playertiley]+seedcrops.getHarvesttime2() && fertilizer[playertilex][playertiley] >= (seedcrops.getFertilizerneeds2() + stats.getFertbonuslim()) && water[playertilex][playertiley] >= (seedcrops.getWaterneed2() + stats.getWaterbonuslim())) {
             stats.harvest2();
             harvest[1] += seedcrops.getProductyield2();
@@ -586,7 +587,7 @@ public class Crops extends Managetiles{
             }
             cropstatus[playertilex][playertiley] = 0;
             plotstatus[playertilex][playertiley] = 0;
-            
+
             stats.useshovel();
         }
     }
@@ -613,7 +614,7 @@ public class Crops extends Managetiles{
         cropstatus[playertilex-1][playertiley+1] = 0; //Bottom Left
         cropstatus[playertilex-1][playertiley-1] = 0; // Top Left
 
-    } 
+    }
 
     //Turnips
     public void seed1plant()
@@ -628,7 +629,7 @@ public class Crops extends Managetiles{
             if (shop.getSeedamount1() > 0) {
                 shop.seedsdeduct1();
                 cropstatus[playertilex][playertiley] = 1;
-                if (daycheck[playertilex][playertiley] == false) {
+                if (!daycheck[playertilex][playertiley]) {
                     dayplanted[playertilex][playertiley] = gamepanel.getMinutes();
                     daycheck[playertilex][playertiley] = true;
                 }
@@ -651,7 +652,7 @@ public class Crops extends Managetiles{
             if (shop.getSeedamount2() > 0) {
                 shop.seedsdeduct2();
                 cropstatus[playertilex][playertiley] = 2;
-                if (daycheck[playertilex][playertiley] == false) {
+                if (!daycheck[playertilex][playertiley]) {
                     dayplanted[playertilex][playertiley] = gamepanel.getMinutes();
                     daycheck[playertilex][playertiley] = true;
                 }
@@ -674,7 +675,7 @@ public class Crops extends Managetiles{
             if (shop.getSeedamount3() > 0) {
                 shop.seedsdeduct3();
                 cropstatus[playertilex][playertiley] = 3;
-                if (daycheck[playertilex][playertiley] == false) {
+                if (!daycheck[playertilex][playertiley]) {
                     dayplanted[playertilex][playertiley] = gamepanel.getMinutes();
                     daycheck[playertilex][playertiley] = true;
                 }
@@ -696,7 +697,7 @@ public class Crops extends Managetiles{
             if (shop.getSeedamount4() > 0) {
                 shop.seedsdeduct4();
                 cropstatus[playertilex][playertiley] = 4;
-                if (daycheck[playertilex][playertiley] == false) {
+                if (!daycheck[playertilex][playertiley]) {
                     dayplanted[playertilex][playertiley] = gamepanel.getMinutes();
                     daycheck[playertilex][playertiley] = true;
                 }
@@ -718,7 +719,7 @@ public class Crops extends Managetiles{
             if (shop.getSeedamount5() > 0) {
                 shop.seedsdeduct5();
                 cropstatus[playertilex][playertiley] = 5;
-                if (daycheck[playertilex][playertiley] == false) {
+                if (!daycheck[playertilex][playertiley]) {
                     dayplanted[playertilex][playertiley] = gamepanel.getMinutes();
                     daycheck[playertilex][playertiley] = true;
                 }
@@ -740,7 +741,7 @@ public class Crops extends Managetiles{
             if (shop.getSeedamount6() > 0) {
                 shop.seedsdeduct6();
                 cropstatus[playertilex][playertiley] = 6;
-                if (daycheck[playertilex][playertiley] == false) {
+                if (!daycheck[playertilex][playertiley]) {
                     dayplanted[playertilex][playertiley] = gamepanel.getMinutes();
                     daycheck[playertilex][playertiley] = true;
                 }
@@ -764,11 +765,11 @@ public class Crops extends Managetiles{
                    rockstatus[playertilex-1][playertiley] == 1 || rockstatus[playertilex][playertiley+1] == 1 ||
                    rockstatus[playertilex][playertiley-1] == 1 || rockstatus[playertilex+1][playertiley+1] == 1 ||
                    rockstatus[playertilex+1][playertiley-1] == 1 || rockstatus[playertilex-1][playertiley+1] == 1 ||
-                   rockstatus[playertilex-1][playertiley-1] == 1 || cropstatus[playertilex][playertiley] != 0 ||   
-                   cropstatus[playertilex+1][playertiley] != 0 || cropstatus[playertilex-1][playertiley] != 0 || 
-                   cropstatus[playertilex][playertiley+1] != 0 || cropstatus[playertilex][playertiley-1] != 0 || 
-                   cropstatus[playertilex+1][playertiley+1] != 0 || cropstatus[playertilex+1][playertiley-1] != 0 || 
-                   cropstatus[playertilex-1][playertiley+1] != 0 || cropstatus[playertilex-1][playertiley-1] != 0 || 
+                   rockstatus[playertilex-1][playertiley-1] == 1 || cropstatus[playertilex][playertiley] != 0 ||
+                   cropstatus[playertilex+1][playertiley] != 0 || cropstatus[playertilex-1][playertiley] != 0 ||
+                   cropstatus[playertilex][playertiley+1] != 0 || cropstatus[playertilex][playertiley-1] != 0 ||
+                   cropstatus[playertilex+1][playertiley+1] != 0 || cropstatus[playertilex+1][playertiley-1] != 0 ||
+                   cropstatus[playertilex-1][playertiley+1] != 0 || cropstatus[playertilex-1][playertiley-1] != 0 ||
                    rockstatus[playertilex][playertiley] == 1 && cropstatus[playertilex][playertiley] != 0) {
             errorindicator = true; error = ("ERROR: Surrounding space occupied, needs 3x3 area");
         } else if (plotstatus[playertilex][playertiley] == 0 || plotstatus[playertilex+1][playertiley] == 0 ||
@@ -781,7 +782,7 @@ public class Crops extends Managetiles{
             if (shop.getSeedamount7() > 0) {
                 shop.seedsdeduct7();
                 cropstatus[playertilex][playertiley] = 7; //Middle
-                if (daycheck[playertilex][playertiley] == false) {
+                if (!daycheck[playertilex][playertiley]) {
                     cropoccupied();
                     dayplanted[playertilex][playertiley] = gamepanel.getMinutes();
                     daycheck[playertilex][playertiley] = true;
@@ -806,11 +807,11 @@ public class Crops extends Managetiles{
                    rockstatus[playertilex-1][playertiley] == 1 || rockstatus[playertilex][playertiley+1] == 1 ||
                    rockstatus[playertilex][playertiley-1] == 1 || rockstatus[playertilex+1][playertiley+1] == 1 ||
                    rockstatus[playertilex+1][playertiley-1] == 1 || rockstatus[playertilex-1][playertiley+1] == 1 ||
-                   rockstatus[playertilex-1][playertiley-1] == 1 || cropstatus[playertilex][playertiley] != 0 ||   
-                   cropstatus[playertilex+1][playertiley] != 0 || cropstatus[playertilex-1][playertiley] != 0 || 
-                   cropstatus[playertilex][playertiley+1] != 0 || cropstatus[playertilex][playertiley-1] != 0 || 
-                   cropstatus[playertilex+1][playertiley+1] != 0 || cropstatus[playertilex+1][playertiley-1] != 0 || 
-                   cropstatus[playertilex-1][playertiley+1] != 0 || cropstatus[playertilex-1][playertiley-1] != 0 || 
+                   rockstatus[playertilex-1][playertiley-1] == 1 || cropstatus[playertilex][playertiley] != 0 ||
+                   cropstatus[playertilex+1][playertiley] != 0 || cropstatus[playertilex-1][playertiley] != 0 ||
+                   cropstatus[playertilex][playertiley+1] != 0 || cropstatus[playertilex][playertiley-1] != 0 ||
+                   cropstatus[playertilex+1][playertiley+1] != 0 || cropstatus[playertilex+1][playertiley-1] != 0 ||
+                   cropstatus[playertilex-1][playertiley+1] != 0 || cropstatus[playertilex-1][playertiley-1] != 0 ||
                    rockstatus[playertilex][playertiley] == 1 && cropstatus[playertilex][playertiley] != 0) {
             errorindicator = true; error = ("ERROR: Surrounding space occupied, needs 3x3 area");
         } else if (plotstatus[playertilex][playertiley] == 0 || plotstatus[playertilex+1][playertiley] == 0 ||
@@ -823,7 +824,7 @@ public class Crops extends Managetiles{
             if (shop.getSeedamount8() > 0) {
                 shop.seedsdeduct8();
                 cropstatus[playertilex][playertiley] = 8; //Middle
-                 if (daycheck[playertilex][playertiley] == false) {
+                 if (!daycheck[playertilex][playertiley]) {
                     cropoccupied();
                     dayplanted[playertilex][playertiley] = gamepanel.getMinutes();
                     daycheck[playertilex][playertiley] = true;
@@ -835,7 +836,7 @@ public class Crops extends Managetiles{
     }
 
     private void cropoccupied()
-    {   
+    {
         cropstatus[playertilex+1][playertiley] = 9; // Right
         cropstatus[playertilex-1][playertiley] = 9; // Left
         cropstatus[playertilex][playertiley+1] = 9; // Down
@@ -853,7 +854,7 @@ public class Crops extends Managetiles{
             for (j = 0; j < stats.getCropwidth(); j++) {
                 //1 - Turnips Veg
                 if (plotstatus[j][i] == 0 && rockstatus[j][i] == 1) {
-                    baselayer[j][i] = 5; 
+                    baselayer[j][i] = 5;
                 } else if (plotstatus[j][i] == 1 && rockstatus[j][i] == 0 && cropstatus[j][i] == 1){
                     if (gamepanel.getMinutes() >= dayplanted[j][i] && gamepanel.getMinutes() < (dayplanted[j][i]+(seedcrops.getHarvesttime1()/2))) {
                         baselayer[j][i] = 133; //Seeds
@@ -861,15 +862,15 @@ public class Crops extends Managetiles{
                         baselayer[j][i] = 15; // Halfwaystate
                     } else if (gamepanel.getMinutes() == dayplanted[j][i]+seedcrops.getHarvesttime1() && fertilizer[j][i] < (seedcrops.getFertilizerneeds1() + stats.getFertbonuslim()) && water[j][i] >= (seedcrops.getWaterneed1() + stats.getWaterbonuslim())) {
                         baselayer[j][i] = 134;//Death to no fertilizer
-                        fertilizer[j][i] = 0; 
+                        fertilizer[j][i] = 0;
                         water[j][i] = 0;
                     } else if (gamepanel.getMinutes() == dayplanted[j][i]+seedcrops.getHarvesttime1() && fertilizer[j][i] >= (seedcrops.getFertilizerneeds1() + stats.getFertbonuslim()) && water[j][i] < (seedcrops.getWaterneed1() + stats.getWaterbonuslim())) {
                         baselayer[j][i] = 134;//Death to no water
-                        fertilizer[j][i] = 0; 
+                        fertilizer[j][i] = 0;
                         water[j][i] = 0;
                     } else if (gamepanel.getMinutes() == dayplanted[j][i]+seedcrops.getHarvesttime1() && fertilizer[j][i] < (seedcrops.getFertilizerneeds1() + stats.getFertbonuslim()) && water[j][i] < (seedcrops.getWaterneed1() + stats.getWaterbonuslim())) {
                         baselayer[j][i] = 134;//Death to no water and fertilizer
-                        fertilizer[j][i] = 0; 
+                        fertilizer[j][i] = 0;
                         water[j][i] = 0;
                     } else if (gamepanel.getMinutes() == dayplanted[j][i]+seedcrops.getHarvesttime1() && fertilizer[j][i] >= (seedcrops.getFertilizerneeds1() + stats.getFertbonuslim()) && water[j][i] >= (seedcrops.getWaterneed1() + stats.getWaterbonuslim())) {
                         baselayer[j][i] = 20; // Ready to harvest
@@ -1229,6 +1230,6 @@ public class Crops extends Managetiles{
         this.errorindicator = errorindicator;
     }
 
-    
-    
+
+
 }

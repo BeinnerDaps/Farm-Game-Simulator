@@ -1,10 +1,9 @@
 package MainGame;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import MainGame.Tiles.Managetiles;
-
-import java.util.ArrayList;
 
 public class Seedcrops {
 
@@ -29,7 +28,7 @@ public class Seedcrops {
     private int harvesttime6;
     private int harvesttime7;
     private int harvesttime8;
-    
+
     private int waterneed1;
     private int waterneed2;
     private int waterneed3;
@@ -38,7 +37,7 @@ public class Seedcrops {
     private int waterneed6;
     private int waterneed7;
     private int waterneed8;
-    
+
     private int fertilizerneeds1;
     private int fertilizerneeds2;
     private int fertilizerneeds3;
@@ -100,7 +99,7 @@ public class Seedcrops {
     private int expyield8;
 
     private Random random = new Random();
-    private ArrayList<String> seedtotal = new ArrayList<String>();
+    private ArrayList<String> seedtotal = new ArrayList<>();
 
     public Seedcrops (String seedType1, String seedType2, String seedType3,
                   String seedname1, int harvesttime1, int waterneed1, int fertilizerneeds1, int seedcost1, int basesellingprice1, int expyield1, int productmin1, int productmax1,
@@ -111,7 +110,7 @@ public class Seedcrops {
                   String seedname6, int harvesttime6, int waterneed6, int fertilizerneeds6, int seedcost6, int basesellingprice6, double expyield6, int productyield6,
                   String seedname7, int harvesttime7, int waterneed7, int fertilizerneeds7, int seedcost7, int basesellingprice7, int expyield7, int productmin7, int productmax7,
                   String seedname8, int harvesttime8, int waterneed8, int fertilizerneeds8, int seedcost8, int basesellingprice8, int expyield8, int productmin8, int productmax8)
-    {   
+    {
         //Total amount of seeds
         seedtotal.add(new String(seedname1));
         seedtotal.add(new String(seedname2));
@@ -148,7 +147,7 @@ public class Seedcrops {
         this.expyield2 = expyield2;
         this.productmin2 = productmin2;
         this.productmax2 = productmax2;
-        
+
         //seed3
         this.seedname3 = seedname3;
         this.harvesttime3 = harvesttime3;
@@ -159,7 +158,7 @@ public class Seedcrops {
         this.expyield3 = expyield3;
         this.productmin3 = productmin3;
         this.productmax3 = productmax3;
-        
+
         //seed4
         this.seedname4 = seedname4;
         this.harvesttime4 = harvesttime4;
@@ -169,7 +168,7 @@ public class Seedcrops {
         this.basesellingprice4 = basesellingprice4;
         this.expyield4 = expyield4;
         this.productyield4 = productyield4;
-        
+
         //seed5
         this.seedname5 = seedname5;
         this.harvesttime5 = harvesttime5;
@@ -179,7 +178,7 @@ public class Seedcrops {
         this.basesellingprice5 = basesellingprice5;
         this.expyield5 = expyield5;
         this.productyield5 = productyield5;
-        
+
         //seed6
         this.seedname6 = seedname6;
         this.harvesttime6 = harvesttime6;
@@ -189,7 +188,7 @@ public class Seedcrops {
         this.basesellingprice6 = basesellingprice6;
         this.expyield6 = expyield6;
         this.productyield6 = productyield6;
-        
+
         //seed7
         this.seedname7 = seedname7;
         this.harvesttime7 = harvesttime7;
@@ -200,7 +199,7 @@ public class Seedcrops {
         this.expyield7 = expyield7;
         this.productmin7 = productmin7;
         this.productmax7 = productmax7;
-        
+
         //seed8
         this.seedname8 = seedname8;
         this.harvesttime8 = harvesttime8;
@@ -867,7 +866,7 @@ public class Seedcrops {
     private int seedproductyield8()
     {
         return this.random.nextInt((getProductmax8()+1) - getProductmin8());
-        
+
     }
 
     public void productrandom()
